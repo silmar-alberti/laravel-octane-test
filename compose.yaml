@@ -7,8 +7,8 @@ services:
     image: laravel-octane-php
     container_name: 'laravel-octane-container'
     entrypoint: [php]
-    command: ["/application/artisan", "serve", "--port=80", "--host=0.0.0.0"]
+    command: [ "/application/artisan", "octane:start", "--host=0.0.0.0" ]
     volumes:
       - .:/application
     ports:
-      - 8000:80
+      - 8000:8000

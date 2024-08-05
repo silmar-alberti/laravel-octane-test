@@ -17,6 +17,9 @@ restart:
 php: up
 	docker compose exec php sh
 
+cli:
+	docker compose run --entrypoint=sh -T php
+
 test: up
 	docker compose exec -T --entrypoint php laravel-octane-container ./vendor/bin/phpunit
 
