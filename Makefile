@@ -6,7 +6,10 @@ build:
 	docker compose build
 
 up:
-	docker compose up -d
+	docker compose up php -d
+
+up-prod:
+	docker compose up php-prod -d
 
 down:
 	docker compose down
