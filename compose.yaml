@@ -6,9 +6,24 @@ services:
       target: dev
     image: laravel-octane-php
     container_name: 'laravel-octane-container'
+    restart: on-failure
     entrypoint: [php]
-    command: ["/application/artisan", "serve", "--port=80", "--host=0.0.0.0"]
+    command: [ "/application/artisan", "octane:frankenphp", "--host=0.0.0.0", "--workers=1"]
+    # environment:
+    #   - XDEBUG_MODE=debug
+    #   - XDEBUG_TRIGGER=yes
     volumes:
       - .:/application
     ports:
-      - 8000:80
+      - 8000:8000
+    extra_hosts:
+      - host.docker.internal:host-gateway
+  php-prod:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+      target: prod
+    image: laravel-octane-php-prod
+    container_name: 'laravel-octane-prod-container'
+    ports:
+      - 8001:8000

@@ -6,7 +6,10 @@ build:
 	docker compose build
 
 up:
-	docker compose up -d
+	docker compose up php -d
+
+up-prod:
+	docker compose up php-prod -d
 
 down:
 	docker compose down
@@ -16,6 +19,9 @@ restart:
 
 php: up
 	docker compose exec php sh
+
+cli:
+	docker compose run --entrypoint=sh -T php
 
 test: up
 	docker compose exec -T --entrypoint php laravel-octane-container ./vendor/bin/phpunit
